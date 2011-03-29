@@ -1,0 +1,26 @@
+<dl class="ui-objects-drop-down-template {{css_classes}}" id="{{dom_id}}" style={{default_styles}}>
+  <dt>
+    <label for="{{input_id}}">
+      {{label}}
+    </label>
+    {{#has_extra_info}}
+      <span class="tooltip">
+        Extended Information
+        <span class="description">
+          {{extra_info}}
+        </span>
+      </span>
+    {{/has_extra_info}}
+  </dt>
+  
+  <dd>
+    <select name="{{name}}" id="{{input_id}}">
+      {{#prompt}}
+        <option value="">{{prompt}}</option>
+      {{/prompt}}  
+      {{#options}}    
+        <option value="{{value}}" {{#selected}}selected="selected"{{/selected}} title="{{name}}">{{name}}</option>
+      {{/options}}
+      </select>
+  </dd>
+</dl>

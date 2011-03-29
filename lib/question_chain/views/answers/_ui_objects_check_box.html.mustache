@@ -1,0 +1,19 @@
+<dl class="ui-objects-checkbox-template {{css_classes}}" id="{{dom_id}}" style={{default_styles}}>
+  <dt>
+    <label for="{{input_id}}">
+      {{label}}
+    </label>
+    {{#has_extra_info}}
+      <span class="tooltip">
+        Extended Information
+        <span class="description">
+          {{extra_info}}
+        </span>
+      </span>
+    {{/has_extra_info}}
+  </dt>
+  
+  <dd>
+    <input type="checkbox" name="{{name}}" {{#checked}}checked="checked"{{/checked}} id="{{input_id}}">
+  </dd>
+</dl>

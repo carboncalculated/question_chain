@@ -1,0 +1,15 @@
+development:
+  adapter: mongodb
+  database: carbon_calculated_test_app_development
+  host: localhost
+  username: 
+  password:
+  port: 27017
+
+test: &TEST
+  database: carbon_calculated_test_app_test
+  host: localhost
+  port: 27017
+    
+cucumber:
+  <<: *TEST

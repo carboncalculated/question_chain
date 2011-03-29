@@ -1,0 +1,34 @@
+= QuestionChain
+
+== What Am I?
+
+This is not to be used currently! Work in Progress; Extracting not quite complete and SPECS
+
+There will be guides on how to use this http://guides.carboncalculated.com
+
+This is a Rails3 Gem to be used in conjunction with the soon to be released QuestionChainJS library
+to be used with the CarbonCalculated API http://carboncalculated.com
+
+This Gem allows you to create a forms for Carbon Calculations in like 2 sometimes 3 minutes depending on typing speed
+
+At the minute this has dependencies on MongoMapper currently thinking about moving to more ORM agnostic approach
+
+== Getting started
+
+== UiObjects
+
+=== Drop Downs
+
+===  Object Reference Drop Downs
+
+===  Rules
+
+===  Attribute Change
+
+===  Search
+
+===  Markup
+
+=== CSS
+
+=== Bundling

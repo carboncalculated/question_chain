@@ -1,0 +1,29 @@
+source 'http://rubygems.org'
+
+## Bundle the gems you use:
+gem "rails", "3.0.5"
+
+gem "bson_ext", "1.2.4"
+gem "inherited_resources"
+gem "mongo_mapper", "0.8.6"
+gem "hunt"
+gem "transitions"
+gem "question_chain", :path =>File.expand_path("../../", __FILE__), :require => "question_chain"
+gem "yard"
+
+gem "haml", "3.0.21"
+gem "mustache"
+gem "canable"
+
+group :test, :cucumber do
+  gem "database_cleaner", "0.6"
+  gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
+  gem 'selenium-webdriver', '0.1.2'
+  gem 'factory_girl',         '~> 1.3'
+  gem "rake"
+  gem "rspec", "2.5.0"
+  gem "rspec-rails",        "~> 2.5.0"
+  gem 'vcr',                '~> 1.5', :require => false
+  gem 'webmock',            '~> 1.6', :require => false
+  gem "autotest"
+end

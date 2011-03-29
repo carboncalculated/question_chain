@@ -1,0 +1,62 @@
+- @raw = true
+:javascript
+  questionBundle = #{@question.to_json}
+  uiObjectsDropDownTemplate = "#{escape_javascript(render(:partial => "ui_objects_drop_down"))}"
+  uiObjectsCheckboxTemplate = "#{escape_javascript(render(:partial => "ui_objects_check_box"))}"
+  uiObjectsTextFieldTemplate = "#{escape_javascript(render(:partial => "ui_objects_text_field"))}"
+  uiObjectsObjectReferenceDropDownTemplate = "#{escape_javascript(render(:partial => "ui_objects_object_reference_drop_down"))}"
+  uiObjectsRelatableCategoryDropDownTemplate = "#{escape_javascript(render(:partial => "ui_objects_relatable_category_drop_down"))}"
+  uiObjectsObjectSearchTemplate = "#{escape_javascript(render(:partial => "ui_objects_object_search"))}"
+  uiObjectsHiddenFieldTemplate = "#{escape_javascript(render(:partial => "ui_objects_hidden_field"))}"
+- @raw = false
+
+#loader
+
+#global_notice
+
+= yield :before_question
+
+#question
+  = yield :before_question_partial
+  = render :partial => "question"
+  = yield :after_question_partial
+
+  = form_tag question_chain_answer_path, :class => "generic_form", :id => "question_#{@question.id}" do |form|
+    = render :partial => "/shared/error_messages", :locals => {:resource => @answer}
+    = yield :before_ui_objects
+    .ui_groups
+      - @question["ui_groups"].each do |ui_group|
+        .ui_group{:class => "#{ui_group.css_classes}", :id => "ui_object_#{ui_group.id}", :style => "#{ui_group.default_styles}"}
+          %fieldset
+            #ui_objects
+              - ui_group["ui_objects"].each do |ui_object|
+                - case ui_object._type
+                  - when "UiObjects::DropDown"
+                    - @ui_object = ui_object 
+                    = render :partial => "ui_objects_drop_down"
+                  - when "UiObjects::CheckBox"
+                    - @ui_object = ui_object 
+                    = render :partial => "ui_objects_check_box"
+                  - when "UiObjects::TextField"
+                    - @ui_object = ui_object 
+                    = render :partial => "ui_objects_text_field"
+                  - when "UiObjects::ObjectSearch"
+                    - @ui_object = ui_object 
+                    = render :partial => "ui_objects_object_search"
+                  - when "UiObjects::HiddenField"
+                    - @ui_object = ui_object 
+                    = render :partial => "ui_objects_hidden_field"
+                  - when "UiObjects::ObjectReferenceDropDown"
+                    - @ui_object = ui_object 
+                    = render :partial => "ui_objects_object_reference_drop_down"
+                  - when "UiObjects::RelatableCategoryDropDown"
+                    - @ui_object = ui_object 
+                    = render :partial => "ui_objects_relatable_category_drop_down"
+        
+    .buttons
+      %ul
+        %li
+          %input{:type => "submit", :value => "Submit", :class => "submit"}
+    = yield(:after_ui_objects)
+
+= yield :after_question

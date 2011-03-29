@@ -1,0 +1,20 @@
+<dl class="ui-objects-object-search-template {{css_classes}}" id="{{dom_id}}" style={{default_styles}}>
+  <dt>
+    <label for="{{input_id}}">
+      {{label}}
+    </label>
+    {{#has_extra_info}}
+      <span class="tooltip">
+        Extended Information
+        <span class="description">
+          {{extra_info}}
+        </span>
+      </span>
+    {{/has_extra_info}}
+  </dt>
+  
+  <dd>
+    <input type="text" name="{{search_name}}" id="{{search_id}}" value="{{search_value}}">
+    <input type="hidden" name="{{name}}" value="{{value}}" id="{{input_id}}">
+  </dd>
+</dl>
