@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Richard Hooker"]
   s.email       = ["richard.hooker@carboncalculated.com"]
   s.homepage    = ""
-  s.summary     = %q{Rails3 Gem to Generate Carbon Calculated Application}
-  s.description = %q{Rails3 Gem to Generate Carbon Calculated Application}
+  s.summary     = %q{Rails3 Gem to Generate Carbon Calculated Applications}
+  s.description = %q{Rails3 Gem to Generate Carbon Calculated Applications}
 
   s.rubyforge_project = "question_chain"
   
