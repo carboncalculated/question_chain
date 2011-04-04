@@ -2,18 +2,117 @@
 
 == What Am I?
 
-This is not to be used currently! Work in Progress; Extracting not quite complete and SPECS
+Work in Progress!; We Are Extracting functionality this engine from our engine and is in active development; We are basically
+making so other developers can use it;
 
-There will be guides on how to use this http://guides.carboncalculated.com
+There will be guides on how to use this http://guides.carboncalculated.com; 
 
-This is a Rails3 Gem to be used in conjunction with the soon to be released QuestionChainJS library
-to be used with the CarbonCalculated API http://carboncalculated.com
+This Rails3 Engine allows you to create a forms for Carbon Calculations in like 2 sometimes 3 minutes depending on typing speed.
 
-This Gem allows you to create a forms for Carbon Calculations in like 2 sometimes 3 minutes depending on typing speed
+At the minute this has dependencies on MongoMapper currently thinking about moving to more ORM agnostic approach;
 
-At the minute this has dependencies on MongoMapper currently thinking about moving to more ORM agnostic approach
+Note you will have to go through a few hoops to get this working currently however once you have UI for carbon calculations 
+can be generated very very quickly!
 
 == Getting started
+
+Firstly You will need to be using creating a Rails3 Application;
+
+add question_chain to your Gemfile
+
+    gem "question_chain"
+
+you will also need the QuestionChainJS https://github.com/carboncalculated/QuestionChainJS
+
+This is currently Mootools dependent;
+
+== Setup
+
+You will need to create a method (calculated_session) on your Rails Application Module; as question_chain 
+will look for a calculated session here when it talks to the carbon calculated API
+
+    module YourApplication
+      def self.calculated_session
+        @session ||= Calculated::Session.create(:api_key => ENV[:api_key])
+      end
+    end
+
+=== Background Information
+
+With quesition_chain you are given a Rails3 Engine; this engine provides you with the following;
+
+* Controller Module: (QuestionChain::Answers) For creating editing models that emit carbon (ie Journey; Material; Waste; Car)
+
+* Model Module: (QuestionChain::Answerable) Helper Methods for any model that emits carbon.
+
+* ChainTemplate: Defines context of where in your application your emitting models are located and what if any parent resources 
+it has; example 
+
+* Question: You build a "Question" its this quesition id (4babb5fef78b124341000002) that is then rendered for calculations in the UI
+
+Please look at the example application that uses this Gem; before you go any further
+
+=== Questions
+
+This is where you can build up your UI for the question you wish to ask to calculated emissions;
+
+*  "What was your origin airport and destination airport?"
+*  "How many miles did you travel in your car?"
+*  "What material and how many tones of it do you use?"
+
+Each question will relate to the CarbonCalcualated API! therefore a question will need either a 
+computation_id or a calculator_id
+  
+At the minute there is no UI for creating these question however there are example rake tasks that can be
+seen in the example application
+
+=== ChainTemplate
+
+This where you can define "calculation contexts"; what does that mean? this is where you can say what resource
+emits and its association with another resource; Example below is basically saying for user class it has 
+many flights these flights are to seen as a QuestionChain Question; Its the flight that emits Carbon!
+    
+    ChainTemplate.create!(
+    :for_resource => "user",
+    :context => {
+      "flights" => ["4babb5fef78b124341000002"]
+    })
+    
+=== Controllers
+
+=== Routing
+
+There is currently not a helper for the routing however this is an example structure to get an application working 
+where the context is a calculation model
+
+    # == Have yet to create a Routing helper from question Chain
+    # Hence manua here and this is about is obvious well its just not
+    match '/answers/fire_object_search' => 'answers#fire_object_search'
+    match '/answers/fire_populate_drop_down' => 'answers#fire_populate_drop_down'
+
+    chain_template_routes = lambda do
+      scope "/:context(/:question_id)" do
+        resources :answers, :only => [:new, :create, :index] do
+          collection do
+             post :fire_populate_drop_down
+             post :fire_object_search
+           end
+        end
+      end
+
+      scope "/:context" do
+        resources :answers, :only => [:edit, :update, :show] do
+          collection do
+             post :fire_populate_drop_down
+             post :fire_object_search
+           end
+        end
+      end
+    end
+
+    resource :users do
+      chain_template_routes.call
+    end
 
 == UiObjects
 
@@ -30,5 +129,3 @@ At the minute this has dependencies on MongoMapper currently thinking about movi
 ===  Markup
 
 === CSS
-
-=== Bundling
