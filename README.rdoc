@@ -14,6 +14,10 @@ At the minute this has dependencies on MongoMapper currently thinking about movi
 Note you will have to go through a few hoops to get this working currently however once you have UI for carbon calculations 
 can be generated very very quickly!
 
+If you really want to dive in then please look at this example application using question chain; 
+
+https://github.com/carboncalculated/example-question-chain-application
+
 == Getting started
 
 Firstly You will need to be using creating a Rails3 Application;
