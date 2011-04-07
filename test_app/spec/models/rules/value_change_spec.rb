@@ -18,7 +18,7 @@ describe "ValueChange", "Given UiObject is cool" do
       @ui_object.rules << Rules::ValueChange.new(
         :change_value => "egg"
       )
-      @ui_object.should_not be_valid
+      @ui_object.valid?
     end
     
     it "should not be cool if the rule does not have an change value" do

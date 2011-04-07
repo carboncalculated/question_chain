@@ -2,10 +2,11 @@ module Rules
   class ValueChange < Rule
     
     # == Keys
-    key :change_value, :type => String
+    field :change_value, :type => String
     
     # == Validations
     validates_presence_of :change_value
+    validates_presence_of :affecting_ui_object
     
     # == Association
     belongs_to :affecting_ui_object, :class_name => "UiObject"

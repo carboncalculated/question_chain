@@ -27,7 +27,7 @@ describe "UiObject" do
     
     it "should set default attributes" do
       @ui_object.valid?
-      @ui_object.ui_attributes.should == {"visible" => true, "enabled" => true, "value" => ""}
+      @ui_object.ui_attributes.should == {:visible => true, :enabled => true, :value => ""}
     end
   end  
 end

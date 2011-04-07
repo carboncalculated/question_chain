@@ -4,7 +4,6 @@
   include Mongoid::Serialize
 
   # == Fields
-  field :_type, :type => String
   field :name, :type => String
   field :label, :type => String
   field :description, :type => String
