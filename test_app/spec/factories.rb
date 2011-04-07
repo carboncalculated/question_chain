@@ -52,7 +52,7 @@ end
 Factory.define :drop_down, :class => UiObjects::DropDown do |f|
   f.label {Factory.next(:label)}
   f.association :ui_group
-  f.options {%w(what ever the egg says is true)}
+  f.drop_down_options {%w(what ever the egg says is true)}
 end
 
 Factory.define :check_box, :class => UiObjects::CheckBox do |f|

@@ -25,13 +25,13 @@ module UiObjects
     # == Validations
     validates_presence_of :object_name
         
-    def options
+    def ui_options
       return [] if !populate
-      @options ||= get_options(object_name, filters || [])
+      @ui_options ||= get_options(object_name, filters || [])
     end
     
     def self.attributes_for_api
-      %w(id name _type label description rules default_value ui_attributes options prompt max_options object_name drop_down_target_id  extra_info css_classes)
+      %w(id name _type label description rules default_value ui_attributes ui_options prompt max_options object_name drop_down_target_id  extra_info css_classes)
     end
     
     # object_reference drop down can only target its formula units basically

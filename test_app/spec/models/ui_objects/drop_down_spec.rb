@@ -17,12 +17,12 @@ describe "UiObjects::DropDown" do
   
   describe "when saving and setting ui_attributes" do
     before(:each) do
-      @ui_object = Factory(:drop_down, :ui_attributes => {:visible => "false"})
+      @ui_object = Factory(:drop_down, :ui_attributes => {:visible => false})
       @ui_object.save!
     end
     
     it "should add the ui_attribute along with the defaults" do
-      @ui_object.ui_attributes.should == {"visible"=>"false", "enabled"=>true, "value"=>""}
+      @ui_object.ui_attributes.should == {:visible => false, :enabled =>true, :value=>""}
     end
   end
 end

@@ -32,9 +32,9 @@ module UiObjects
     # == Attrs
     attr_accessor_with_default :default_rule, true
     
-    def options
+    def ui_options(beans)
       return [] if !populate
-      @options ||= relatable_categories.select{|obj| (filters.empty? || (!filters.empty? && filters.include?(obj.id.to_s)))}.map do |obj|
+      @ui_options ||= relatable_categories.select{|obj| (filters.empty? || (!filters.empty? && filters.include?(obj.id.to_s)))}.map do |obj|
         {:value => obj.id, :name => obj.name}
       end.sort_by{|option| option[:name]}
     end

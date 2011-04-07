@@ -21,8 +21,8 @@ module UiObjects
       %w(id name _type label position description rules ui_attributes prompt max_options object_name extra_info css_classes)
     end
     
-    def options(filter, relatable_category_names = [])
-      @options ||= get_options(object_name, filter || "", relatable_category_names)
+    def ui_options(filter, relatable_category_names = [])
+      @ui_options ||= get_options(object_name, filter || "", relatable_category_names)
     end
     
     protected

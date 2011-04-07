@@ -49,16 +49,7 @@
   def per_page
     read_attribute(:per_page) || 50
   end
-     
-  # fires the rules that are attached the ui object
-  def change_value!(ui_objects = [])
-    if ui_object = ui_objects.detect{|ui| ui["id"] == self.id.to_s}
-      value = ui_object["ui_attributes"] && ui_object["ui_attributes"]["value"] || ""
-      @observer_state = true
-      notify_observers(value, ui_objects)
-    end
-  end
-      
+           
   def visible?
     ui_attributes[:visible]
   end
