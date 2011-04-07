@@ -32,7 +32,7 @@ module UiObjects
     # == Attrs
     attr_accessor_with_default :default_rule, true
     
-    def ui_options(beans)
+    def ui_options
       return [] if !populate
       @ui_options ||= relatable_categories.select{|obj| (filters.empty? || (!filters.empty? && filters.include?(obj.id.to_s)))}.map do |obj|
         {:value => obj.id, :name => obj.name}
@@ -49,7 +49,7 @@ module UiObjects
     end
     
     def self.attributes_for_api
-      %w(id name _type label populate drop_down_target_is_relatable related_attribute order rules filters description drop_down_target_id default_value ui_attributes options prompt max_options object_name order  extra_info css_classes)
+      %w(id name _type label populate drop_down_target_is_relatable related_attribute order rules filters description drop_down_target_id default_value ui_attributes ui_options prompt max_options object_name order  extra_info css_classes)
     end
     
     protected
