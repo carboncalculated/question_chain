@@ -9,7 +9,10 @@ There will be guides on how to use this http://guides.carboncalculated.com;
 
 This Rails3 Engine allows you to create a forms for Carbon Calculations in like 2 sometimes 3 minutes depending on typing speed.
 
-At the minute this has dependencies on MongoMapper currently thinking about moving to more ORM agnostic approach;
+There is a mongoid Branch if you wish to use mongoid
+
+At the minute this has dependencies on MongoMapper (master branch)
+
 
 Note you will have to go through a few hoops to get this working currently however once you have UI for carbon calculations 
 can be generated very very quickly!
