@@ -3,7 +3,7 @@ class RelatableCategoryFilter
   include Mongoid::Serialize
   
   # == Fields
-  field :filters, :type => Array
+  field :filters, :type => Array, :default => []
   
   # == Associations
   belongs_to :ui_group, :index => true

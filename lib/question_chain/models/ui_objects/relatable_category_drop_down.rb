@@ -4,7 +4,7 @@ module UiObjects
     # == Field
     field :related_attribute, :type => String
     field :object_name, :type => String
-    field :filters, :type => Array
+    field :filters, :type => Array, :default => []
     field :order, :type => String
     field :prompt, :type => String
     field :max_options, :type => Integer, :default => 20
