@@ -1,12 +1,12 @@
 module UiObjects
   class ObjectSearch < UiObject
     
-    # == keys
-    key :object_name, String
-    key :max_options, Integer, :default => 20
-    key :prompt, String
-    key :attribute_for_value, String, :default => "id"
-    key :attribute_for_display, String, :default => "identifier"
+    # == fields
+    field :object_name, :type => String
+    field :max_options, :type => Integer, :default => 20
+    field :prompt, :type => String
+    field :attribute_for_value, :type => String, :default => "id"
+    field :attribute_for_display, :type => String, :default => "identifier"
     
     # == Validations
     validates_presence_of :object_name

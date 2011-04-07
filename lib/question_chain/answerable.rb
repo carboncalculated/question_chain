@@ -1,20 +1,19 @@
 module QuestionChain
   module Answerable
     extend ActiveSupport::Concern
-    include MongoMapper::Serialize
+    include Mongoid::Serialize
   
     included do
-      key :question_id, ObjectId
-      key :result, Hash
-      key :answer_params, Hash
-      key :answer_json, String
-      key :user_id, ObjectId
-      key :reference, String
-      key :stored_identifier, String
-      key :stored_variable_input, String
-      key :created_by, String
-      key :_extra_keywords, Array
-      timestamps!
+      include Mongoid::Search
+      
+      field :result, :type => Hash
+      field :answer_params, :type => Hash
+      field :answer_json, :type => String
+      field :reference, :type => String
+      field :stored_identifier, :type => String
+      field :stored_variable_input, :type => String
+      field :created_by, :type => String
+      field :_extra_keywords, :type => Array, :default => []
     
       cattr_accessor :_extra_keyword_methods
       before_save :add_stored_identifier
@@ -22,46 +21,26 @@ module QuestionChain
       before_save :cache_attributes
       
       # == Search
-      plugin Hunt
-      searches :reference, :created_by, :stored_variable_input, :stored_identifier, :_extra_keywords
-      ensure_index :'searches.default'
+      search_in :reference, :created_by, :stored_variable_input, :stored_identifier, :_extra_keywords => :to_s
       
       # == Indexes
-      ensure_index :reference
-      ensure_index :stored_identifier
-      ensure_index :stored_variable_input
+      index :reference
+      index :stored_identifier
+      index :stored_variable_input
       
       # == Validations
       validates_presence_of :question_id
       validates_presence_of :answer_params
       validates_presence_of :result
-      validates_true_for :answer, :logic => Proc.new {!answer_params.empty?}, :message => nil
-      validates_true_for :result, :logic => Proc.new {!result.empty?}, :message => nil
+      validates_presence_of :user
       
       # == Associations
       belongs_to :user
+      belongs_to :question
       
       # == attr Protected
       attr_protected :user_id
       
-    end
-    
-    module ClassMethods
-      require "csv" #ruby19
-      def self.to_csv(options = {}) 
-        @csv_string ||= FasterCSV.generate do |csv|          
-          # header row
-          csv << self.attributes_for_api
-           
-          # data rows
-          self.all(options).each do |resource|
-            attributes = self.attributes_for_api.map do |key|
-              resource.send(key)
-            end
-            csv << attributes
-          end
-        end
-      end
     end
     
     module InstanceMethods

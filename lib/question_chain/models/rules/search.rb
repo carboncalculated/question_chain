@@ -8,7 +8,7 @@ module Rules
         
     # ask the parent document to get the options
     def get_options(filter, relatable_category_names = [])
-      _parent_document.options(filter, relatable_category_names)
+      ui_object.options(filter, relatable_category_names)
     end
     
     def self.attributes_for_api

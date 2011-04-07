@@ -1,5 +1,7 @@
 module UiObjects
   class HiddenField < UiObject
-    key :name, String, :default => "computation_id"
+    
+    # == Fields
+    field :name, :type => String, :default => "computation_id"
   end
 end

@@ -1,17 +1,17 @@
 module UiObjects
   class ObjectReferenceDropDown < UiObject
     
-    # == Keys
-    key :prompt, String
-    key :max_options, Integer, :default => 20
+    # == Fields
+    field :prompt, :type => String
+    field :max_options, :type => Integer, :default => 20
     
     # :id => :attribute_name # not quite sure about the option trackers
-    key :object_name, String
-    key :filters, Set # filters
-    key :filter_attribute, String
-    key :filter_value, String
-    key :order, String
-    key :drop_down_target_id, ObjectId
+    key :object_name, :type => String
+    key :filters, :type => Set # filters
+    key :filter_attribute, :type => String
+    key :filter_value, :type => String
+    key :order, :type => String
+    key :drop_down_target_id, :type => String
     key :drop_down_target_options_filters, Array # == Array of filters for formula inputs
     key :populate, Boolean, :default => true
     key :relatable_options, Boolean, :default => false
@@ -20,7 +20,7 @@ module UiObjects
     key :external, Boolean, :default => true
     
     # == Indexes
-    ensure_index :object_name
+    index :object_name
     
     # == Validations
     validates_presence_of :object_name

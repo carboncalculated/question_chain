@@ -1,8 +1,9 @@
 module Rules
   class AttributeChange < Rule
+    
     # {:id => {:atttibute_name => "new_state"}, :id => {:atttibute_name => "new_state"}}
-    key :affecting_ui_objects, Hash
-    key :compare_text_value, :default => false
+    field :affecting_ui_objects, :type => Hash
+    field :compare_text_value, :type => Boolean, :default => false
     
     def self.attributes_for_api
       %w(id fire_value _type affecting_ui_objects ui_object_id negate_value compare_text_value)

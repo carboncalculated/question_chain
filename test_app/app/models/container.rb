@@ -1,8 +1,8 @@
 class Container
-  include MongoMapper::Document
+  include Mongoid::Document
   
-  # == Keys
-  key :name, String
+  # == Fields
+  field :name, :type => String
   
   # == Associations
   has_many :flights

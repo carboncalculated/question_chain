@@ -1,4 +1,4 @@
-module MongoMapper
+module Mongoid
   module Serialize
     extend ActiveSupport::Concern
     

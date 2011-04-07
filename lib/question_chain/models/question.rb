@@ -1,26 +1,25 @@
 class Question
-  include MongoMapper::Document
-  include MongoMapper::Serialize
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  include Mongoid::Serialize
   
-  # == Keys
-  key :name, String
-  key :label, String
-  key :_type, String
-  key :description, String
-  key :calculator_id, ObjectId
-  key :computation_id, ObjectId
-  timestamps!
+  # == Fields
+  field :name, :type => String
+  field :label, :type => String
+  field :description, :type => String
   
   # == Indexes
-  ensure_index :names
-  ensure_index :label
+  index :name
+  index :label
     
   # == Validations
   validates_presence_of :name
   validates_uniqueness_of :name
   
   # == Associations
-  many :ui_groups, :order => :position.asc, :dependent => :destroy
+  has_many :ui_groups, :order => :position.asc, :dependent => :destroy, :index => true
+  belongs_to :calculator, :index => true
+  belongs_to :computation, :index => true
   
   # == Hooks
   def self.attributes_for_api

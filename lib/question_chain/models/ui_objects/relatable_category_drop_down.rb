@@ -1,31 +1,30 @@
 module UiObjects
   class RelatableCategoryDropDown < UiObject
     
-    # == Keys
-    key :related_attribute, String
-    key :object_name, String
-    key :filters, Set
-    key :order, String
-    key :prompt, String
-    key :max_options, Integer, :default => 20
-    key :drop_down_target_id, ObjectId
-    key :drop_down_target_is_relatable, Boolean, :default => false
-    key :populate, Boolean, :default => true
-    key :attribute_for_value, String, :default => "id"
-    key :attribute_for_display, String, :default => "label"
-    key :external, Boolean, :default => true
+    # == Field
+    field :related_attribute, :type => String
+    field :object_name, :type => String
+    field :filters, :type => Array
+    field :order, :type => String
+    field :prompt, :type => String
+    field :max_options, :type => Integer, :default => 20
+    field :drop_down_target_is_relatable, :type => Boolean, :default => false
+    field :populate, :type => Boolean, :default => true
+    field :attribute_for_value, :type => String, :default => "id"
+    field :attribute_for_display, :type => String, :default => "label"
+    field :external, :type => Boolean, :default => true
     
     # == Indexes
-    ensure_index :filters
-    ensure_index :object_name
-    ensure_index :related_attribute
+    index :filters
+    index :object_name
+    index :related_attribute
     
     # == Validations
     validates_presence_of :related_attribute
     validates_presence_of :object_name
     
     # == Associations
-    belongs_to :drop_down_target, :class_name => "UiObject", :foreign_key => "drop_down_target_id"
+    belongs_to :drop_down_target, :class_name => "UiObject", :foreign_key => "drop_down_target_id", :index => true
         
     # == Hooks
     after_create :add_default_rule

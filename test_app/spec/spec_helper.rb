@@ -7,7 +7,7 @@ require 'rspec/rails'
 require File.expand_path("../factories", __FILE__)
 
 require "database_cleaner"
-DatabaseCleaner[:mongo_mapper].strategy = :truncation
+DatabaseCleaner[:mongoid].strategy = :truncation
 DatabaseCleaner.clean_with(:truncation)
 
 Rspec.configure do |config|

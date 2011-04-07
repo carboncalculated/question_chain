@@ -1,14 +1,16 @@
 class Rule
-  include MongoMapper::EmbeddedDocument
-  include MongoMapper::Serialize
+  include Mongoid::Document
+  include Mongoid::Serialize
   
   # == Keys
-  key :fire_value, String
-  key :negate_value, :default => false
-  key :_type, String
+  field :fire_value, :type => String
+  field :negate_value, :type => Boolean, :default => false
+  
+  # == Assocations
+  embedded_in :ui_object
     
   def ui_object_id
-    _parent_document.id
+    ui_object.id
   end
   
   # have to have this here to declear all subclass not being used?

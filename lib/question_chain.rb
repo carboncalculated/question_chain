@@ -7,9 +7,7 @@ require "calculated"
 
 # == Carbon cal specific
 require "question_chain/mongo_serialization"
-require "question_chain/state_machine"
 require "question_chain/mustache_handler"
-require "question_chain/stored_template"
 require "question_chain/mustache_rails"
 require "question_chain/answerable"
 

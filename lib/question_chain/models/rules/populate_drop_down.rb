@@ -2,7 +2,7 @@ module Rules
   class PopulateDropDown < Rule
     
     # == Keys
-    key :ui_object_attribute_check, Hash, :default => nil
+    field :ui_object_attribute_check, :type => Hash, :default => nil
       
     def fire!(value = nil, ui_objects_hash = {})
       # does not matter what the value is in this instance
@@ -10,13 +10,13 @@ module Rules
     end
     
     def drop_down_target_id
-      _parent_document.drop_down_target_id
+      ui_object.drop_down_target_id
     end
     
     # ask the parent document to get the options
     def get_options(object_ids = [])
       options = []
-      _parent_document.get_target_drop_down_options(object_ids).each_pair do |key ,value|
+      ui_object.get_target_drop_down_options(object_ids).each_pair do |key ,value|
         options << {:name => value, :value => key}
       end
       options.sort_by{|option| option[:name]}

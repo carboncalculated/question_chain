@@ -6,17 +6,6 @@ describe "Flight (Test Model)" do
       before(:each) do
         @flight = Flight.new
       end
-
-      it "should have answerable keys" do
-        @flight.keys.should include(:question_id)
-        @flight.keys.should include(:result)
-        @flight.keys.should include(:answer_params)
-        @flight.keys.should include(:answer_json)
-        @flight.keys.should include(:user_id)
-        @flight.keys.should include(:reference)
-        @flight.keys.should include(:stored_identifier)
-        @flight.keys.should include(:_extra_keywords)
-      end
       
       it "Should have access to _extra_keyword class method" do
         Flight.should respond_to(:_extra_keyword_methods)
@@ -29,6 +18,7 @@ describe "Flight (Test Model)" do
       end
       
       it "should be cool from the factory" do
+        @flight.valid?
         @flight.should be_valid
       end
       

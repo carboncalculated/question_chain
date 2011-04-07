@@ -15,11 +15,16 @@ Factory.sequence :related_attribute do |n|
   "related_attribute_#{n}"
 end
 
+Factory.define :user do |f|
+  f.name {Factory.next(:name)}
+end
+
 Factory.define :flight do |f|
   f.question_id {BSON::ObjectId.new}
   f.result{ {"co2"=> "45.5", "object_references" => {"123" => {"identifier" => "beans"}}}}
   f.answer_params {{"flight" => "123"}}
   f.reference {Factory.next(:name)}
+  f.association :user
 end
 
 Factory.define :chain_template do |f|

@@ -2,12 +2,13 @@ module Rules
   class ValueChange < Rule
     
     # == Keys
-    key :affecting_ui_object_id, ObjectId
-    key :change_value, String
+    key :change_value, :type => String
     
     # == Validations
-    validates_presence_of :affecting_ui_object_id
     validates_presence_of :change_value
+    
+    # == Association
+    belongs_to :affecting_ui_object, :class_name => "UiObject"
     
     def fire!(value = nil, ui_objects_hash = {})
       # does not matter what the value is in this instance

@@ -1,13 +1,14 @@
 class ChainTemplate 
-  include MongoMapper::Document
-  include MongoMapper::StateMachine
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  include Mongoid::Transitions
   
   # == Keys
-  key :context, Hash # [Hash<content => [Array<MongoIds>]>]
-  key :account_id, ObjectId # used to override any specific question essentially
-  key :for_resource, String
-  key :parent_resource, String
-  key :active_at, Time
+  field :context, :type => Hash # [Hash<content => [Array<MongoIds>]>]
+  field :for_resource, :type => String
+  field :parent_resource, :type => String
+  field :active_at, :type => Time
+  field :state, :type => String, :default => "pending"
   
   # == State Machine
   state_machine :initial => :pending do
@@ -24,12 +25,11 @@ class ChainTemplate
   end
   
   # == Indexes
-  ensure_index :for_resource
+  index :for_resource
   
   # == Validations
   validates_presence_of :for_resource
   validates_presence_of :context
-  validates_true_for :context, :logic => Proc.new{ !context.empty?}
   
   def self.attributes_for_api
     %w(id name for_resource account_id parent_resource)

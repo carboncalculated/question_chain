@@ -1,14 +1,13 @@
 source 'http://rubygems.org'
 
 ## Bundle the gems you use:
-gem "rails", "3.0.5"
-
-gem "bson_ext", "1.2.4"
+gem "rails", "3.0.6.rc2"
+gem "mongoid", "2.0.1"
+gem "bson_ext", "1.3.0"
 gem "inherited_resources"
-gem "mongo_mapper", "0.8.6"
-gem "hunt"
-gem "transitions"
+gem "transitions", :git => "git://github.com/netizer/transitions.git", :require => ["transitions", "mongoid/transitions"]
 gem "question_chain", :path =>File.expand_path("../../", __FILE__), :require => "question_chain"
+gem "mongoid_search", :git => "git@github.com:hookercookerman/mongoid_search.git"
 gem "yard"
 
 gem "haml", "3.0.21"

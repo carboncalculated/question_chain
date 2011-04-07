@@ -1,8 +1,9 @@
 class Flight
-  include MongoMapper::Document
+  include Mongoid::Document
   include QuestionChain::Answerable
-  
-  key :container_id, ObjectId
+
+  # == Assocations
+  belongs_to :container
   
   self._extra_keyword_methods = [:milk, :beans]
   
