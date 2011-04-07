@@ -33,7 +33,7 @@ describe "UiGroup" do
       @ui_group.save
       @text_field = @ui_group.text_fields.create!(Factory.attributes_for(:text_field))
       @relatable_category_drop_down = @ui_group.relatable_category_drop_downs.create!(Factory.attributes_for(:relatable_category_drop_down))
-      @object_referenece_drop_down = @ui_group.object_reference_drop_down.create!(Factory.attributes_for(:object_reference_drop_down))
+      @object_referenece_drop_down = @ui_group.create_object_reference_drop_down(Factory.attributes_for(:object_reference_drop_down))
     end
     
     it "should have 3 ui_objects" do

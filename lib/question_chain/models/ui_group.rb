@@ -35,10 +35,6 @@ class UiGroup
   has_many :children, :class_name => 'UiGroup', :foreign_key => 'parent_id'
   has_one :relatable_category_filter, :class_name => "RelatableCategoryFilter"
   
-  # thats right only ever one object_reference in a ui_group
-  # its a constraint we just need
-  has_one :object_reference_drop_down, :class_name => "UiObjects::ObjectReferenceDropDown"
-  
   def self.attributes_for_api
     %w(id name label question_id relatable_category_filter ui_objects ui_attributes default_styles css_classes)
   end
