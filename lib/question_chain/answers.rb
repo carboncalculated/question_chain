@@ -20,7 +20,7 @@ module QuestionChain
       def edit
         @answer = resource
         enforce_permission
-        @question = Question.find!(resource.question_id).to_hash
+        @question = Question.find(resource.question_id).to_hash
         @answer_params = @answer.answer_params # used for mustache templates
         set_answer_values_on_question!(@question, @answer_params)
         edit!
@@ -32,7 +32,7 @@ module QuestionChain
         @answer.user_id = current_user.id
         @answer.answer_params = params[:answer]
         @answer_params = params[:answer] # used for mustache templates
-        @question = Question.find!(resource.question_id).to_hash
+        @question = Question.find(resource.question_id).to_hash
         @answer.result = get_answer(@question, @answer_params)
         set_answer_values_on_question!(@question, @answer_params)
         build_answer_errors! 
@@ -191,10 +191,10 @@ module QuestionChain
 
       def question_from_context
         if question_id = params[:question_id]
-           Question.find!(question_id).to_hash
+           Question.find(question_id).to_hash
         else
            ids = find_question_ids
-           Question.find!(ids.first).to_hash
+           Question.find(ids.first).to_hash
         end
       end
 
@@ -282,8 +282,8 @@ module QuestionChain
       end
 
       def get_chain_template_for_resource(for_resource)
-        ChainTemplate.first(:model_state => "active", :for_resource => for_resource, :account_id => @account.try(:id)) ||
-        ChainTemplate.first(:model_state => "active", :for_resource => for_resource)
+        ChainTemplate.first(:conditions => {:model_state => "active", :for_resource => for_resource, :account_id => @account.try(:id)}) ||
+        ChainTemplate.first(:conditions => {:model_state => "active", :for_resource => for_resource})
       end
     end
   end

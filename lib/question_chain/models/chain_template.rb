@@ -31,6 +31,14 @@ class ChainTemplate
   validates_presence_of :for_resource
   validates_presence_of :context
   
+  def state
+    read_attribute(:model_state)
+  end
+  
+  def state=(state)
+    write_attribute(:model_state, state)
+  end
+  
   def self.attributes_for_api
     %w(id name for_resource account_id parent_resource)
   end
