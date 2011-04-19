@@ -33,9 +33,7 @@ class UiObject
   validates_presence_of :ui_group_id
   validates_presence_of :label
   validates_presence_of :ui_attributes
-  validates_true_for :ui_attributes, :logic => Proc.new{
-    !ui_attributes.empty?
-  }
+  validate :valid_ui_attributes
   validates_associated :rules
   
   # == Associations
@@ -44,7 +42,7 @@ class UiObject
   
   # == Hooks
   before_save :add_rule_observers!
-  before_validation_on_create :set_default_attributes
+  before_validation :set_default_attributes, :on => :create
   
   def self.attributes_for_api
     %w(id name _type label description default_value ui_attributes ui_group_id rules extra_info css_classes)
@@ -87,6 +85,10 @@ class UiObject
     rules.each do |rule|
       self.add_observer(rule, :fire!)
     end
+  end
+  
+  def valid_ui_attributes
+    errors.add(:ui_attributes, "") if ui_attributes.empty?
   end
 
 end

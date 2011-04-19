@@ -4,6 +4,19 @@ require 'rspec/rails'
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
+class User
+  include MongoMapper::Document
+  
+  # == Keys
+  key :first_name, String
+  key :last_name, String
+  
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+end
+
+
 require File.expand_path("../factories", __FILE__)
 
 require "database_cleaner"

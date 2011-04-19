@@ -5,7 +5,7 @@ module MongoMapper
     included do
       include ::Transitions
       key :model_state, String
-      before_validation_on_create :set_initial_state
+      before_validation :set_initial_state, :on => :create
       validates_presence_of :model_state
     end
     

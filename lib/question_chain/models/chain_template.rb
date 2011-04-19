@@ -29,7 +29,7 @@ class ChainTemplate
   # == Validations
   validates_presence_of :for_resource
   validates_presence_of :context
-  validates_true_for :context, :logic => Proc.new{ !context.empty?}
+  validate :valid_context
   
   def self.attributes_for_api
     %w(id name for_resource account_id parent_resource)
@@ -39,5 +39,9 @@ class ChainTemplate
   def set_active_at
     self.active_at = Time.now
     self.save!
+  end
+  
+  def valid_context
+    errors.add(:context, "") if context.empty?
   end
 end

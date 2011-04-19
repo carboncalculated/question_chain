@@ -8,14 +8,14 @@ describe "Flight (Test Model)" do
       end
 
       it "should have answerable keys" do
-        @flight.keys.should include(:question_id)
-        @flight.keys.should include(:result)
-        @flight.keys.should include(:answer_params)
-        @flight.keys.should include(:answer_json)
-        @flight.keys.should include(:user_id)
-        @flight.keys.should include(:reference)
-        @flight.keys.should include(:stored_identifier)
-        @flight.keys.should include(:_extra_keywords)
+        @flight.keys.should include("question_id")
+        @flight.keys.should include("result")
+        @flight.keys.should include("answer_params")
+        @flight.keys.should include("answer_json")
+        @flight.keys.should include("user_id")
+        @flight.keys.should include("reference")
+        @flight.keys.should include("stored_identifier")
+        @flight.keys.should include("_extra_keywords")
       end
       
       it "Should have access to _extra_keyword class method" do
@@ -63,8 +63,8 @@ describe "Flight (Test Model)" do
         flights.first.should == @flight
       end
       
-      it "should not be found on a silly search like eggs" do
-        flights = Flight.search "eggs"
+      it "should not be found on a silly search like crumpets" do
+        flights = Flight.search "crumpets"
         flights.should be_empty
       end
     end

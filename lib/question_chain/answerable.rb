@@ -2,6 +2,7 @@ module QuestionChain
   module Answerable
     extend ActiveSupport::Concern
     include MongoMapper::Serialize
+    
   
     included do
       key :question_id, ObjectId
@@ -22,7 +23,7 @@ module QuestionChain
       before_save :cache_attributes
       
       # == Search
-      plugin Hunt
+      include Hunt
       searches :reference, :created_by, :stored_variable_input, :stored_identifier, :_extra_keywords
       ensure_index :'searches.default'
       
@@ -35,8 +36,9 @@ module QuestionChain
       validates_presence_of :question_id
       validates_presence_of :answer_params
       validates_presence_of :result
-      validates_true_for :answer, :logic => Proc.new {!answer_params.empty?}, :message => nil
-      validates_true_for :result, :logic => Proc.new {!result.empty?}, :message => nil
+      validates_presence_of :user
+      validate :valid_answer_params
+      validate :valid_result
       
       # == Associations
       belongs_to :user
@@ -45,25 +47,7 @@ module QuestionChain
       attr_protected :user_id
       
     end
-    
-    module ClassMethods
-      require "csv" #ruby19
-      def self.to_csv(options = {}) 
-        @csv_string ||= FasterCSV.generate do |csv|          
-          # header row
-          csv << self.attributes_for_api
-           
-          # data rows
-          self.all(options).each do |resource|
-            attributes = self.attributes_for_api.map do |key|
-              resource.send(key)
-            end
-            csv << attributes
-          end
-        end
-      end
-    end
-    
+        
     module InstanceMethods
       def add_extra_keywords
         unless (self.class._extra_keyword_methods || []).empty?
@@ -134,9 +118,18 @@ module QuestionChain
       end
       
       def cache_attributes
-        write_attribute(:created_by, user.full_name)
+        write_attribute(:created_by, user.full_name) if user && user.respond_to?(:full_name)
         write_attribute(:stored_variable_input, variable_input)
       end
+      
+      def valid_answer_params
+        errors.add(:answer_params, "") if answer_params.empty?
+      end
+      
+      def valid_result
+        errors.add(:result, "") if result.empty?
+      end
     end
+    
   end
 end

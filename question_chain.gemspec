@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "question_chain"
   
   s.add_dependency 'mustache',         '>= 0.98.0'
-  s.add_dependency 'mongo_mapper',     '>= 0.8.1'
+  s.add_dependency 'mongo_mapper',     '~> 0.9.0'
   s.add_dependency 'mustache',         '>= 0.98.0'
   s.add_dependency 'hashie',           ">= 0.2.1"
   s.add_dependency 'crack',            ">= 0.1.8"

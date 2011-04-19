@@ -1,12 +1,12 @@
 source 'http://rubygems.org'
 
 ## Bundle the gems you use:
-gem "rails", "3.0.5"
+gem "rails", "3.0.7"
 
-gem "bson_ext", "1.2.4"
+gem "bson_ext", "1.3.0"
 gem "inherited_resources"
-gem "mongo_mapper", "0.8.6"
-gem "hunt"
+gem "mongo_mapper", "~> 0.9.0"
+gem "hunt", :git => "git://github.com/hookercookerman/hunt.git"
 gem "transitions"
 gem "question_chain", :path =>File.expand_path("../../", __FILE__), :require => "question_chain"
 gem "yard"
