@@ -5,7 +5,7 @@ class MustacheHandler
 
   # this string given is evaled in the context of the view_context
   # therefore we can generate from that basis
-  def call(template)
+  def self.call(template)
     # virtual path is just a method in the new version of rails so can update from there!
     virtual_path = template.respond_to?(:virtual_path) ? template.virtual_path : template.details[:virtual_path]
     mustache_class_name = "#{virtual_path}_view".classify
