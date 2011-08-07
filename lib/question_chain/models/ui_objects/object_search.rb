@@ -15,7 +15,11 @@ module UiObjects
     after_create :add_default_rule
     
     # == Attrs
-    attr_accessor_with_default :default_rule, true
+    attr_accessor :default_rule
+    def default_rule
+      @default_rule || true
+    end
+    
     
     def self.attributes_for_api
       %w(id name _type label position description rules ui_attributes prompt max_options object_name extra_info css_classes)

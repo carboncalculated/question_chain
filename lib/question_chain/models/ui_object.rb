@@ -24,7 +24,7 @@ class UiObject
   
   # == Attrs
   attr_accessor :value
-  class_inheritable_accessor :default_values
+  class_attribute :default_values
   
   # Class set values  
   self.default_values = {:visible => true, :enabled => true}
