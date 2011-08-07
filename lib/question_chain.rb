@@ -20,10 +20,9 @@ module QuestionChain
   class Engine < Rails::Engine
     
     config.carbon_calculated = ActiveSupport::OrderedOptions.new
-    paths.app.controllers << "lib/question_chain/controllers"
-    paths.app.views << "lib/question_chain/views"
-    paths.app.models << "lib/question_chain/models"
-    
+    config.paths["app/controller"] << "lib/question_chain/controllers"
+    config.paths["app/views"] << "lib/question_chain/views"
+    config.paths["app/models"] << "lib/question_chain/models"    
     config.after_initialize do
       QuestionChain.class_eval do
         def self.calculated_session
